@@ -3,9 +3,9 @@ import './App.css';
 function App() {
 
 const todoList= [
-  {id:1, tittle:"review resources"},
-  {id:2, tittle:"take notes"},
-  {id:3, tittle:"code out app"}
+  {id:1, title:"review resources"},
+  {id:2, title:"take notes"},
+  {id:3, title:"code out app"}
 ]
 
 return(
@@ -16,7 +16,7 @@ return(
   
   <ul>
     {todoList.map(todo => 
-      <li key={todo.id}>{todo.tittle}</li>
+      <li key={todo.id}>{todo.title}</li>
     )}
   </ul>
 </div>
