@@ -9,9 +9,7 @@ return(
    <h1>Todo List</h1>
     <TodoForm />
     <TodoList />
-  
-  <h1>My Todos</h1>
-  
+    
 </div>
 )
 }
