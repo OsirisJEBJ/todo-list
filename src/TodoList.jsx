@@ -1,4 +1,4 @@
-import TodoListItem from './todoListItem'; 
+import TodoListItem from './TodoListItem'; 
 function TodoList({todoList}){
   
     return(
