@@ -12,13 +12,14 @@ function TodoForm({onAddTodo}){
 
 
   };
+  
 
 
     return(
       <form onSubmit={handleAddTodo}>
       
         <TextInputWithLabel
-          ref={inputRef}
+          inputref={inputRef}
           value={workingTodoTitle}
           onChange={(e) => setWorkingTodoTitle(e.target.value)}
           elementId={'todoTitle'}

@@ -24,12 +24,22 @@ function completeTodo(id) {
   }));
 }
 
+function updateTodo(editTodo){
+  setTodoList(previous => previous.map(todo => {
+    if (todo.id === editTodo.id) {
+      return { ...todo, title: editTodo.title };
+    }
+    return todo;
+  }));
+
+}
+
 
 return(
 <div>
    <h1>Todo List</h1>
    <TodoForm onAddTodo={addTodo}/>
-    <TodoList onCompleteTodo={completeTodo} todoList={todoList} />
+    <TodoList onCompleteTodo={completeTodo} onUpdateTodo={updateTodo} todoList={todoList} />
     
 </div>
 )
