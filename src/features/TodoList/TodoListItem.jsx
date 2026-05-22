@@ -18,9 +18,8 @@ const handleEdit = (e) => updateTitle(e.target.value);
 const handleCancel = cancelEdit;
 
 const handleUpdate = (e) => {
-  e.preventDefault();
   if (!isEditing) return;
-
+  e.preventDefault();
   const finalTitle = finishEdit();
   onUpdateTodo({ ...todo, title: finalTitle });
 };
@@ -57,7 +56,7 @@ const handleUpdate = (e) => {
                 type="checkbox"
                 checked={todo.isCompleted}
                 onChange={() => onCompleteTodo(todo.id)}
-                id={`checkbox-${todo.id}`}
+                id={`checkbox${todo.id}`}
               />
               </label>
               <span onClick={() => startEditing()}>{todo.title}</span>
