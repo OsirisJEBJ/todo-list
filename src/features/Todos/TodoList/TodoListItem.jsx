@@ -57,7 +57,10 @@ const handleUpdate = (e) => {
                 checked={todo.isCompleted}
                 onChange={() => onCompleteTodo(todo.id)}
                 id={`checkbox${todo.id}`}
+<<<<<<< HEAD:src/features/Todos/TodoList/TodoListItem.jsx
 
+=======
+>>>>>>> 7993e6dfa1ef2a4f56ba148963e53ef0e94420c2:src/features/TodoList/TodoListItem.jsx
               />
               </label>
               <span onClick={() => startEditing()}>{todo.title}</span>
