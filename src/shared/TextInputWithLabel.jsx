@@ -1,7 +1,7 @@
 function TextInputWithLabel({
     elementId,
     labelText,
-    inputRef,
+    ref,
     onChange,
     value
 
@@ -12,7 +12,7 @@ function TextInputWithLabel({
             <input
               id={elementId}
               type="text" 
-              ref={inputRef}
+              ref={ref}
               onChange={onChange}
               value={value}
             />
