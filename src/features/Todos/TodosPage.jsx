@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import TodoList from './TodoList/TodoList';
+import TodoList from '../TodoList/TodoList';
 import TodoForm from './TodoForm';
 function TodosPage({token}) {    
 const [todoList, setTodoList] = useState([]);
@@ -113,7 +113,6 @@ async function completeTodo(id) {
       body: JSON.stringify({
         title: originalTodo.title,
         isCompleted: true,
-       // createdAt: originalTodo.createdAt
       })
     });
 
@@ -173,7 +172,6 @@ async function updateTodo(editTodo) {
       body: JSON.stringify({
         title: editTodo.title,
         isCompleted: originalTodo.isCompleted,
-       // createdAt: originalTodo.createdAt
       })
     });
 
