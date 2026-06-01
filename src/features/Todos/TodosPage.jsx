@@ -1,6 +1,4 @@
 import { useState, useEffect, useCallback } from 'react';
-import TodoList from '../TodoList/TodoList';
-import { useState, useEffect } from 'react';
 import TodoList from './TodoList/TodoList';
 import TodoForm from './TodoForm';
 import SortBy from '../../shared/SortBy';
@@ -10,7 +8,7 @@ function TodosPage({token}) {
 const [todoList, setTodoList] = useState([]);
 const [error, setError] = useState('');
 const [isTodoListLoading, setIsTodoListLoading] = useState(false);
-const [sortBy, setSortBy] = useState('createdAt');
+const [sortBy, setSortBy] = useState('creationDate');
 const [sortDirection, setSortDirection] = useState('desc');
 const [filterTerm, setFilterTerm] = useState('');
 const [dataVersion, setDataVersion] = useState(0);
@@ -21,6 +19,7 @@ const debouncedFilterTerm = useDebounce(filterTerm, 300);
 const handleFilterChange = (newTerm) => setFilterTerm(newTerm);
 
 const invalidateCache = useCallback(() => {
+  console.log('Invalidating memo cache after todo mutation')
   setDataVersion(prev => prev + 1);
 }, []);
 
@@ -91,7 +90,6 @@ async function addTodo(todoTitle) {
   };
    // Adding the new todo to the list immediately
   setTodoList(prev => [newTodo, ...prev]);
- invalidateCache();
 
   try {
   // Send POST request to create the new todo  
@@ -119,6 +117,7 @@ async function addTodo(todoTitle) {
         todo.id === tempId ? data : todo
       )
     );
+    invalidateCache();
 
 
   } catch (err) {
@@ -196,7 +195,6 @@ async function updateTodo(editTodo) {
         : todo
     )
   );
-    invalidateCache();
 
 
   try {
@@ -227,7 +225,7 @@ async function updateTodo(editTodo) {
         todo.id === editTodo.id ? data : todo
       )
     );
-
+    invalidateCache();
   } catch (err) {
     //Rollback si falla
     setTodoList(prev =>
