@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
 function Logon({
-  onSetEmail = () => {},
-  onSetToken = () => {}}) {
+  onSetEmail,
+  onSetToken}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [authError, setAuthError] = useState('');
@@ -41,8 +41,7 @@ function Logon({
     <form onSubmit={handleSubmit}>
       {authError && <p>{authError}</p>}
 
-      <label>
-        Email:
+      <label htmlFor='email'>Email:</label>
         <input 
           type="email" 
           value={email}
@@ -50,10 +49,8 @@ function Logon({
           autoComplete='username'
           required
         />
-      </label>
 
-      <label>
-        Password:
+      <label htmlFor='password'>Password:</label>
         <input 
           type="password" 
           value={password}
@@ -61,7 +58,6 @@ function Logon({
           autoComplete='current-password'
           required
         />
-      </label>
 
       <button type="submit" disabled={isLoggingOn}>
         {isLoggingOn ? "Logging in..." : "Log On"}

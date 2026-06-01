@@ -143,13 +143,6 @@ async function completeTodo(id) {
 }
 
 
-//function updateTodo(editTodo){
-//  setTodoList(previous => previous.map(todo => {
-//    if (todo.id === editTodo.id) {
-//      return { ...todo, title: editTodo.title };
-//    }
-//    return todo;
-//  }));}
 async function updateTodo(editTodo) {
   //Store the original todo for potential rollback
   const originalTodo = todoList.find(todo => todo.id === editTodo.id);
