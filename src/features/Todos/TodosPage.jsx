@@ -246,7 +246,7 @@ return(
     {error && (
   <div>
     <p>{error}</p>
-    <button onClick={() => setError('')}>Clear Error</button>
+    <button onClick={dispatch({type: TODO_ACTIONS.CLEAR_ERROR})}>Clear Error</button>
   </div>
 )}
     {filterError && (
