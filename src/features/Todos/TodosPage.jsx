@@ -4,7 +4,7 @@ import TodoForm from './TodoForm';
 import SortBy from '../../shared/SortBy';
 import FilterInput from '../../shared/FilterInput';
 import useDebounce from '../../utils/useDebounce';
-import { todoReducer, initialTodoState } from '../../reducers/todoReducer';
+import { todoReducer, initialTodoState, TODO_ACTIONS } from '../../reducers/todoReducer';
 function TodosPage({token}) {    
 const [state, dispatch] = useReducer(todoReducer, initialTodoState);
 
@@ -34,8 +34,7 @@ useEffect(() => {
   if (!token) return; 
 
   async function fetchTodos() {
-    setIsTodoListLoading(true);
-    setError('');
+   dispatch({ type: TODO_ACTIONS.FETCH_START });
 
     const paramsObject = {
     sortBy,
@@ -53,7 +52,7 @@ if (debouncedFilterTerm) {
         method: 'GET',
         headers: {
           'X-CSRF-TOKEN': token
-        },
+        }, 
         credentials: 'include'
       });
 
@@ -66,20 +65,22 @@ if (debouncedFilterTerm) {
       }
 
       const data = await response.json();
-      setTodoList(data.tasks);
-      setFilterError('');
+      dispatch({
+        type: TODO_ACTIONS.FETCH_SUCCESS,
+        payload: { todos: data.tasks }
+      });
 
 
     }  catch (error) {
-  if (debouncedFilterTerm || sortBy !== 'creationDate' || sortDirection !== 'desc') {
-    setFilterError(`Error filtering/sorting todos: ${error.message}`);
-  } else {
-    setError(`Error fetching todos: ${error.message}`);
-  }
+ dispatch({
+  type: TODO_ACTIONS.FETCH_ERROR,
+  payload: {   
+    message: `Error fetching todos: ${error.message}`,
+    isFilterError: false, },
+ });
+
+
 }
- finally {
-      setIsTodoListLoading(false);
-    }
   }
 
   fetchTodos();
@@ -95,8 +96,10 @@ async function addTodo(todoTitle) {
     isCompleted: false
   };
    // Adding the new todo to the list immediately
-  setTodoList(prev => [newTodo, ...prev]);
-
+dispatch({
+  type: TODO_ACTIONS.ADD_TODO_START,
+  payload: { newTodo }
+});
   try {
   // Send POST request to create the new todo  
     const response = await fetch('/api/tasks', {
@@ -118,17 +121,18 @@ async function addTodo(todoTitle) {
 
     const data = await response.json(); 
     //Optimistically update the todo list with the actual data from the server, replacing the temporary todo
-    setTodoList(prev =>
-      prev.map(todo =>
-        todo.id === tempId ? data : todo
-      )
-    );
+        dispatch({
+      type: TODO_ACTIONS.ADD_TODO_SUCCESS,
+      payload: { tempId, data }
+    });
     invalidateCache();
 
 
   } catch (err) {
-    setTodoList(prev => prev.filter(todo => todo.id !== tempId));
-    setError(err.message);
+    dispatch({
+      type: TODO_ACTIONS.ADD_TODO_ERROR,
+      payload: { tempId, message: err.message }
+    });
   }
 }
 
