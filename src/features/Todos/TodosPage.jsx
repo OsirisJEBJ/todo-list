@@ -22,7 +22,12 @@ const {
 
 const debouncedFilterTerm = useDebounce(filterTerm, 300);
 
-const handleFilterChange = (newTerm) => setFilterTerm(newTerm);
+const handleFilterChange = (newTerm) => {
+  dispatch({
+    type: TODO_ACTIONS.SET_FILTER,
+    payload: { filterTerm: newTerm }
+  });
+};
 
 const invalidateCache = useCallback(() => {
   console.log('Invalidating memo cache after todo mutation')
