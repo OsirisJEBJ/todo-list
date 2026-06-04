@@ -1,4 +1,4 @@
-import { useReducer, useEffect, useCallback } from 'react';
+import { useState,useReducer, useEffect, useCallback } from 'react';
 import TodoList from './TodoList/TodoList';
 import TodoForm from './TodoForm';
 import SortBy from '../../shared/SortBy';
@@ -7,7 +7,7 @@ import useDebounce from '../../utils/useDebounce';
 import { todoReducer, initialTodoState, TODO_ACTIONS } from '../../reducers/todoReducer';
 function TodosPage({token}) {    
 const [state, dispatch] = useReducer(todoReducer, initialTodoState);
-
+const [dataVersion, setDataVersion] = useState(0);
 const {
   todoList,
   error,
@@ -15,7 +15,6 @@ const {
   sortBy,
   sortDirection,
   filterTerm,
-  dataVersion,
   filterError
 } = state;
 
@@ -257,13 +256,12 @@ return(
     {filterError && (
   <div>
     <p>{filterError}</p>
-    <button onClick={() => setFilterError('')}>Clear Filter Error</button>
+    <button onClick={() => dispatch({type: TODO_ACTIONS.CLEAR_FILTER_ERROR})}>Clear Filter Error</button>
     <button
       onClick={() => {
-        setFilterTerm('');
-        setSortBy('creationDate');
-        setSortDirection('desc');
-        setFilterError('');
+        dispatch({type: TODO_ACTIONS.SET_FILTER, payload: { filterTerm: '' }});
+        dispatch({type: TODO_ACTIONS.SET_SORT, payload: { sortBy: 'creationDate', sortDirection: 'desc' }});
+        dispatch({type: TODO_ACTIONS.CLEAR_FILTER_ERROR});
       }}
     >
       Reset Filters
@@ -276,8 +274,8 @@ return(
     <SortBy
   sortBy={sortBy}
   sortDirection={sortDirection}
-  onSortByChange={setSortBy}
-  onSortDirectionChange={setSortDirection}
+  onSortByChange={(sortBy) => dispatch({ type: TODO_ACTIONS.SET_SORT, payload: { sortBy, sortDirection } })}
+  onSortDirectionChange={(sortDirection) => dispatch({ type: TODO_ACTIONS.SET_SORT, payload: { sortBy, sortDirection } })}
    />
     <FilterInput filterTerm={filterTerm} onFilterChange={handleFilterChange} />
     <TodoForm onAddTodo={addTodo}/>
