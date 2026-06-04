@@ -143,11 +143,10 @@ async function completeTodo(id) {
   if (!originalTodo) return;
 
   //Optimistic update
-  setTodoList(prev =>
-    prev.map(todo =>
-      todo.id === id ? { ...todo, isCompleted: true } : todo
-    )
-  );
+ dispatch({
+    type: TODO_ACTIONS.COMPLETE_TODO_START,
+    payload: { id }
+  });
 
   try {
     //PATCH
@@ -173,21 +172,18 @@ async function completeTodo(id) {
     }
     const data = await response.json();
 
-    setTodoList(prev =>
-      prev.map(todo =>
-        todo.id === id ? data : todo
-      )
-    );
+    dispatch({
+      type: TODO_ACTIONS.COMPLETE_TODO_SUCCESS,
+      payload: { id, data }
+    });
     invalidateCache();
 
   } catch (err) {
     //Rollback to original state if the request fails
-    setTodoList(prev =>
-      prev.map(todo =>
-        todo.id === id ? originalTodo : todo
-      )
-    );
-    setError(err.message);
+    dispatch({
+      type: TODO_ACTIONS.COMPLETE_TODO_ERROR,
+      payload: { id, originalTodo, message: err.message }
+    });
   }
 }
 
@@ -198,13 +194,10 @@ async function updateTodo(editTodo) {
   if (!originalTodo) return;
 
   //Optimistic update
-  setTodoList(prev =>
-    prev.map(todo =>
-      todo.id === editTodo.id
-        ? { ...todo, title: editTodo.title }
-        : todo
-    )
-  );
+  dispatch({
+    type: TODO_ACTIONS.UPDATE_TODO_START,
+    payload: { id: editTodo.id, newTitle: editTodo.title }
+  });
 
 
   try {
@@ -230,20 +223,17 @@ async function updateTodo(editTodo) {
     }
        const data = await response.json();
 
-    setTodoList(prev =>
-      prev.map(todo =>
-        todo.id === editTodo.id ? data : todo
-      )
-    );
+    dispatch({
+      type: TODO_ACTIONS.UPDATE_TODO_SUCCESS,
+      payload: { id: editTodo.id, data }
+    });
     invalidateCache();
   } catch (err) {
-    //Rollback si falla
-    setTodoList(prev =>
-      prev.map(todo =>
-        todo.id === editTodo.id ? originalTodo : todo
-      )
-    );
-    setError(err.message);
+    //Rollback to original state if the request fails
+  dispatch({
+      type: TODO_ACTIONS.UPDATE_TODO_ERROR,
+      payload: { id: editTodo.id, originalTodo, message: err.message }
+    });
   }
 }
 
