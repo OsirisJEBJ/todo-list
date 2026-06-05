@@ -1,23 +1,18 @@
-import './App.css';
-import TodosPage from './features/Todos/TodosPage';
-import Header from './shared/Header'; 
+import Header from './shared/Header';
 import Logon from './features/Logon';
-import { useAuth } from './reducers/contexts/AuthProvider.jsx';
+import TodosPage from './features/Todos/TodosPage';
+import { useAuth } from './contexts/AuthContext.jsx';
 
 function App() {
-  const { isAuthenticated } = useAuth();  
+  const { isAuthenticated } = useAuth();
 
-return(
-  <div>
+  return (
+    <>
       <Header />
-
-      {isAuthenticated ? (
-        <TodosPage />
-      ) : (
-        <Logon />
-      )}
-    </div>
-)
+      {isAuthenticated ? <TodosPage /> : <Logon />}
+    </>
+  );
 }
 
-export default App
+export default App;
+

@@ -1,5 +1,5 @@
 import { useState,useReducer, useEffect, useCallback } from 'react';
-import { useAuth } from '../../reducers/contexts/AuthContext.jsx';
+import { useAuth } from '../../contexts/AuthContext.jsx';
 import TodoList from './TodoList/TodoList';
 import TodoForm from './TodoForm';
 import SortBy from '../../shared/SortBy';

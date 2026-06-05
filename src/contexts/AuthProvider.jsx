@@ -7,26 +7,35 @@ export function AuthProvider({ children }) {
 
   const login = async (userEmail, password) => {
     try {
-      const options = await fetch('/api/users/logon', {
+      const options =  {
         method: 'POST',
+
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
-        body: JSON.stringify({ email : userEmail, password })
-      });
+        body: JSON.stringify({ email : userEmail, password }),
+      };
+
       const res = await fetch('/api/users/logon', options);
       const data = await res.json();
+
 
       if (res.status === 200 && data.name && data.csrfToken) {
         setEmail(data.name);
         setToken(data.csrfToken);
         return { success: true };
-      }
+      }else {
 
-      return { success: false, error: data?.message };
-    } catch(error) {
+      return {
+        success: false, 
+        error:`Authentication failed: ${data?.message}`,
+      };
+    }
+  }
+     catch(error) {
       return {
          success: false,
-         error: 'Network error during login' };
+         error: 'Network error during login', 
+      };
     }
   };
 

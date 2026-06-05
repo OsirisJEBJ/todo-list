@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAuth } from '../reducers/contexts/AuthContext.jsx';
+import { useAuth } from '../contexts/AuthContext.jsx';
 
 function Logon() {
   const { login } = useAuth();
