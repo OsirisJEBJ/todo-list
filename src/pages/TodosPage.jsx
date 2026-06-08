@@ -1,15 +1,21 @@
+import { useSearchParams } from 'react-router';
 import { useState,useReducer, useEffect, useCallback } from 'react';
-import { useAuth } from '../../contexts/AuthContext.jsx';
-import TodoList from './TodoList/TodoList';
-import TodoForm from './TodoForm';
-import SortBy from '../../shared/SortBy';
-import FilterInput from '../../shared/FilterInput';
-import useDebounce from '../../utils/useDebounce';
-import { todoReducer, initialTodoState, TODO_ACTIONS } from '../../reducers/todoReducer';
+import { useAuth } from '../contexts/AuthContext.jsx';
+import TodoList from '../features/Todos/TodoList/TodoList.jsx';
+import TodoForm from '../features/Todos/TodoForm.jsx';
+import SortBy from '../shared/SortBy.jsx';
+import FilterInput from '../shared/FilterInput.jsx';
+import StatusFilter from '../shared/StatusFilter.jsx';
+import useDebounce from '../utils/useDebounce.js';
+import { todoReducer, initialTodoState, TODO_ACTIONS } from '../reducers/todoReducer.js';
+
 function TodosPage() {  
 const { token } = useAuth();   
-  
+const [searchParams] = useSearchParams(); 
+
 const [state, dispatch] = useReducer(todoReducer, initialTodoState);
+ // Get status filter from URL, default to 'all'
+const statusFilter = searchParams.get('status') || 'all';
 const [dataVersion, setDataVersion] = useState(0);
 const {
   todoList,
@@ -280,9 +286,17 @@ return(
   onSortByChange={(sortBy) => dispatch({ type: TODO_ACTIONS.SET_SORT, payload: { sortBy, sortDirection } })}
   onSortDirectionChange={(sortDirection) => dispatch({ type: TODO_ACTIONS.SET_SORT, payload: { sortBy, sortDirection } })}
    />
+    <StatusFilter />
+
     <FilterInput filterTerm={filterTerm} onFilterChange={handleFilterChange} />
     <TodoForm onAddTodo={addTodo}/>
-    <TodoList onCompleteTodo={completeTodo} onUpdateTodo={updateTodo} todoList={todoList} dataVersion={dataVersion}/>
+    <TodoList 
+    onCompleteTodo={completeTodo} 
+    onUpdateTodo={updateTodo} 
+    todoList={todoList} 
+    dataVersion={dataVersion}
+    statusFilter={statusFilter}
+    />
     
 </div>
 )
