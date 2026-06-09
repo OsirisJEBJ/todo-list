@@ -19,7 +19,6 @@ const debouncedFilterTerm = useDebounce(filterTerm, 300);
 const handleFilterChange = (newTerm) => setFilterTerm(newTerm);
 
 const invalidateCache = useCallback(() => {
-  console.log('Invalidating memo cache after todo mutation')
   setDataVersion(prev => prev + 1);
 }, []);
 
