@@ -80,18 +80,15 @@ if (debouncedFilterTerm) {
 
 
 async function addTodo(todoTitle) {
-  // Temporary todo with a unique ID for optimistic UI update
   const tempId = Date.now();
   const newTodo = {
     id: tempId,
     title: todoTitle,
     isCompleted: false
   };
-   // Adding the new todo to the list immediately
   setTodoList(prev => [newTodo, ...prev]);
 
   try {
-  // Send POST request to create the new todo  
     const response = await fetch('/api/tasks', {
       method: 'POST',
       headers: {
@@ -110,7 +107,6 @@ async function addTodo(todoTitle) {
     }
 
     const data = await response.json(); 
-    //Optimistically update the todo list with the actual data from the server, replacing the temporary todo
     setTodoList(prev =>
       prev.map(todo =>
         todo.id === tempId ? data : todo
@@ -127,11 +123,9 @@ async function addTodo(todoTitle) {
 
 
 async function completeTodo(id) {
-  //Store the original todo for potential rollback
   const originalTodo = todoList.find(todo => todo.id === id);
   if (!originalTodo) return;
 
-  //Optimistic update
   setTodoList(prev =>
     prev.map(todo =>
       todo.id === id ? { ...todo, isCompleted: true } : todo
@@ -139,7 +133,6 @@ async function completeTodo(id) {
   );
 
   try {
-    //PATCH
     const response = await fetch(`/api/tasks/${id}`, {
       method: 'PATCH',
       headers: {
@@ -150,10 +143,7 @@ async function completeTodo(id) {
       body: JSON.stringify({
         title: originalTodo.title,
         isCompleted: true,
-        // Note: Including createdAt as required by the assignment,
-        // but this currently causes a validation error on the server.
         createdAt: originalTodo.createdAt
-        // This line is here per assignment requirement but causes issues
       })
     });
 
@@ -170,7 +160,6 @@ async function completeTodo(id) {
     invalidateCache();
 
   } catch (err) {
-    //Rollback to original state if the request fails
     setTodoList(prev =>
       prev.map(todo =>
         todo.id === id ? originalTodo : todo
@@ -182,11 +171,9 @@ async function completeTodo(id) {
 
 
 async function updateTodo(editTodo) {
-  //Store the original todo for potential rollback
   const originalTodo = todoList.find(todo => todo.id === editTodo.id);
   if (!originalTodo) return;
 
-  //Optimistic update
   setTodoList(prev =>
     prev.map(todo =>
       todo.id === editTodo.id
@@ -197,7 +184,6 @@ async function updateTodo(editTodo) {
 
 
   try {
-    //PATCH
     const response = await fetch(`/api/tasks/${editTodo.id}`, {
       method: 'PATCH',
       headers: {
@@ -209,7 +195,6 @@ async function updateTodo(editTodo) {
         title: editTodo.title,
         isCompleted: originalTodo.isCompleted,
         createdAt: originalTodo.createdAt
-        // This line is here per assignment requirement but causes issues
 
       })
     });
@@ -226,7 +211,6 @@ async function updateTodo(editTodo) {
     );
     invalidateCache();
   } catch (err) {
-    //Rollback si falla
     setTodoList(prev =>
       prev.map(todo =>
         todo.id === editTodo.id ? originalTodo : todo
