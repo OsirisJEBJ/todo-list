@@ -1,5 +1,3 @@
-
-// 1. Action types
 export const TODO_ACTIONS = {
   FETCH_START: 'FETCH_START',
   FETCH_SUCCESS: 'FETCH_SUCCESS',
@@ -27,7 +25,6 @@ export const TODO_ACTIONS = {
 
 };
 
-// 2. Initial state
 export const initialTodoState = {
   todoList: [],
   error: '',
@@ -39,12 +36,10 @@ export const initialTodoState = {
   dataVersion: 0,
 };
 
-// 3. Reducer function (obligatoria)
 export function todoReducer(state, action) {
     
   switch (action.type) {
 
-    // Fetching todos
     case TODO_ACTIONS.FETCH_START:
      return {
     ...state,
@@ -65,9 +60,9 @@ export function todoReducer(state, action) {
   return {
     ...state,
     isTodoListLoading: false,
-    error: action.payload.message,
+    error: action.payload.isFilterError ? '' : action.payload.message,
+    filterError: action.payload.isFilterError ? action.payload.message : '',
   };
-    // Adding a new todo
     case TODO_ACTIONS.ADD_TODO_START:
       return {
         ...state,   
@@ -90,7 +85,6 @@ export function todoReducer(state, action) {
         error: action.payload.message,
     };
 
-    // Completing a todo
     case TODO_ACTIONS.COMPLETE_TODO_START:
       return {
         ...state,
@@ -102,7 +96,7 @@ export function todoReducer(state, action) {
       };
 
       case TODO_ACTIONS.COMPLETE_TODO_SUCCESS:
-      return state; // No state change needed, already updated optimistically
+      return state;
 
       case TODO_ACTIONS.COMPLETE_TODO_ERROR:
         return {
@@ -115,7 +109,6 @@ export function todoReducer(state, action) {
             error: action.payload.message,
         };      
 
-    // Updating a todo
     case TODO_ACTIONS.UPDATE_TODO_START:
       return {
         ...state,
@@ -127,20 +120,19 @@ export function todoReducer(state, action) {
       };
 
     case TODO_ACTIONS.UPDATE_TODO_SUCCESS:
-      return state; // No state change needed, already updated optimistically
+      return state;
 
     case TODO_ACTIONS.UPDATE_TODO_ERROR:
       return {
          ...state,
          todoList: state.todoList.map(todo =>
             todo.id === action.payload.id
-            ? { ...todo, title: action.payload.originalTitle }
+            ? { ...todo, title: action.payload.originalTodo.title }
                     : todo
                 ),
                 error: action.payload.message,
             };
     
-    // Sorting and filtering UI actions
 
     case TODO_ACTIONS.SET_SORT:
       return {

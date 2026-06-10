@@ -218,7 +218,7 @@ async function updateTodo(editTodo) {
       body: JSON.stringify({
         title: editTodo.title,
         isCompleted: originalTodo.isCompleted,
-        //createdAt: originalTodo.createdAt
+        createdAt: originalTodo.createdAt
         // This line is here per assignment requirement but causes issues
 
       })
@@ -261,8 +261,6 @@ return(
     <button onClick={() => dispatch({type: TODO_ACTIONS.CLEAR_FILTER_ERROR})}>Clear Filter Error</button>
     <button
       onClick={() => {
-        dispatch({type: TODO_ACTIONS.SET_FILTER, payload: { filterTerm: '' }});
-        dispatch({type: TODO_ACTIONS.SET_SORT, payload: { sortBy: 'createdAt', sortDirection: 'desc' }});
         dispatch({type: TODO_ACTIONS.CLEAR_FILTER_ERROR});
       }}
     >
