@@ -22,6 +22,9 @@ export const TODO_ACTIONS = {
   CLEAR_ERROR: 'CLEAR_ERROR',
   CLEAR_FILTER_ERROR: 'CLEAR_FILTER_ERROR',
   RESET_FILTERS: 'RESET_FILTERS',
+
+  BUMP_VERSION: 'BUMP_VERSION',
+
 };
 
 // 2. Initial state
@@ -29,9 +32,9 @@ export const initialTodoState = {
   todoList: [],
   error: '',
   filterError: '',
-  isTodoListLoading: false,
-  sortBy: 'createdAt',
-  sortDirection: 'desc',
+  isTodoListLoading: true,
+  sortBy: 'createdDate',
+  sortDirection: 'asc',
   filterTerm: '',
   dataVersion: 0,
 };
@@ -171,6 +174,11 @@ export function todoReducer(state, action) {
             sortDirection: 'desc',
             filterTerm: '',
             filterError: '',
+        };
+    case TODO_ACTIONS.BUMP_VERSION:
+        return {
+            ...state,
+            dataVersion: state.dataVersion + 1,
         };
 
     default:
