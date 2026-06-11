@@ -54,6 +54,7 @@ export function todoReducer(state, action) {
     todoList: action.payload.todos,
     isTodoListLoading: false,
     error: '',
+    filterError: '',
   };
 
   case TODO_ACTIONS.FETCH_ERROR:
@@ -168,7 +169,7 @@ export function todoReducer(state, action) {
         return {
             ...state,
             sortBy: 'createdDate',
-            sortDirection: 'desc',
+            sortDirection: 'asc',
             filterTerm: '',
             filterError: '',
         };

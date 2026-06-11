@@ -33,7 +33,7 @@ const handleFilterChange = (newTerm) => {
 
 const invalidateCache = useCallback(() => {
 dispatch({ type: TODO_ACTIONS.BUMP_VERSION });
-}, []);
+}, [dispatch]);
 
 
 useEffect(() => {
