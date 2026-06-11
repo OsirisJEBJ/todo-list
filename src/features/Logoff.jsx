@@ -11,7 +11,7 @@ function Logoff() {
     const result = await logout();
 
     if (!result.success) {
-      setError(result.message || 'Logout failed');
+      setError(result.error || 'Logout failed');
     }
   }
 

@@ -68,6 +68,7 @@ export function todoReducer(state, action) {
         ...state,   
         todoList: [action.payload.newTodo, ...state.todoList],
         error: '',
+        filterError: '',
         };
 
     case TODO_ACTIONS.ADD_TODO_SUCCESS:
@@ -93,6 +94,8 @@ export function todoReducer(state, action) {
             ? { ...todo, isCompleted: true } 
             : todo
         ),
+        error: '',
+        filterError: '',
       };
 
       case TODO_ACTIONS.COMPLETE_TODO_SUCCESS:
@@ -117,6 +120,8 @@ export function todoReducer(state, action) {
             ? { ...todo, title: action.payload.newTitle }
             : todo
         ),
+        error: '',
+        filterError: '',
       };
 
     case TODO_ACTIONS.UPDATE_TODO_SUCCESS:
@@ -162,7 +167,7 @@ export function todoReducer(state, action) {
     case TODO_ACTIONS.RESET_FILTERS:
         return {
             ...state,
-            sortBy: 'creationDate',
+            sortBy: 'createdDate',
             sortDirection: 'desc',
             filterTerm: '',
             filterError: '',
