@@ -11,7 +11,6 @@ function LoginPage() {
   const [authError, setAuthError] = useState('');
   const [isLoggingOn, setIsLoggingOn] = useState(false);
 
-   // Get intended destination from location state, default to /todos
   const from = location.state?.from?.pathname || '/todos';
 
     useEffect(() => {

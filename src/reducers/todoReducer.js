@@ -1,5 +1,3 @@
-
-// 1. Action types
 export const TODO_ACTIONS = {
   FETCH_START: 'FETCH_START',
   FETCH_SUCCESS: 'FETCH_SUCCESS',
@@ -22,26 +20,26 @@ export const TODO_ACTIONS = {
   CLEAR_ERROR: 'CLEAR_ERROR',
   CLEAR_FILTER_ERROR: 'CLEAR_FILTER_ERROR',
   RESET_FILTERS: 'RESET_FILTERS',
+
+  BUMP_VERSION: 'BUMP_VERSION',
+
 };
 
-// 2. Initial state
 export const initialTodoState = {
   todoList: [],
   error: '',
   filterError: '',
-  isTodoListLoading: false,
-  sortBy: 'createdAt',
-  sortDirection: 'desc',
+  isTodoListLoading: true,
+  sortBy: 'createdDate',
+  sortDirection: 'asc',
   filterTerm: '',
   dataVersion: 0,
 };
 
-// 3. Reducer function (obligatoria)
 export function todoReducer(state, action) {
     
   switch (action.type) {
 
-    // Fetching todos
     case TODO_ACTIONS.FETCH_START:
      return {
     ...state,
@@ -56,20 +54,22 @@ export function todoReducer(state, action) {
     todoList: action.payload.todos,
     isTodoListLoading: false,
     error: '',
+    filterError: '',
   };
 
   case TODO_ACTIONS.FETCH_ERROR:
   return {
     ...state,
     isTodoListLoading: false,
-    error: action.payload.message,
+    error: action.payload.isFilterError ? '' : action.payload.message,
+    filterError: action.payload.isFilterError ? action.payload.message : '',
   };
-    // Adding a new todo
     case TODO_ACTIONS.ADD_TODO_START:
       return {
         ...state,   
         todoList: [action.payload.newTodo, ...state.todoList],
         error: '',
+        filterError: '',
         };
 
     case TODO_ACTIONS.ADD_TODO_SUCCESS:
@@ -87,7 +87,6 @@ export function todoReducer(state, action) {
         error: action.payload.message,
     };
 
-    // Completing a todo
     case TODO_ACTIONS.COMPLETE_TODO_START:
       return {
         ...state,
@@ -96,10 +95,12 @@ export function todoReducer(state, action) {
             ? { ...todo, isCompleted: true } 
             : todo
         ),
+        error: '',
+        filterError: '',
       };
 
       case TODO_ACTIONS.COMPLETE_TODO_SUCCESS:
-      return state; // No state change needed, already updated optimistically
+      return state;
 
       case TODO_ACTIONS.COMPLETE_TODO_ERROR:
         return {
@@ -112,7 +113,6 @@ export function todoReducer(state, action) {
             error: action.payload.message,
         };      
 
-    // Updating a todo
     case TODO_ACTIONS.UPDATE_TODO_START:
       return {
         ...state,
@@ -121,23 +121,24 @@ export function todoReducer(state, action) {
             ? { ...todo, title: action.payload.newTitle }
             : todo
         ),
+        error: '',
+        filterError: '',
       };
 
     case TODO_ACTIONS.UPDATE_TODO_SUCCESS:
-      return state; // No state change needed, already updated optimistically
+      return state;
 
     case TODO_ACTIONS.UPDATE_TODO_ERROR:
       return {
          ...state,
          todoList: state.todoList.map(todo =>
             todo.id === action.payload.id
-            ? { ...todo, title: action.payload.originalTitle }
+            ? { ...todo, title: action.payload.originalTodo.title }
                     : todo
                 ),
                 error: action.payload.message,
             };
     
-    // Sorting and filtering UI actions
 
     case TODO_ACTIONS.SET_SORT:
       return {
@@ -167,10 +168,15 @@ export function todoReducer(state, action) {
     case TODO_ACTIONS.RESET_FILTERS:
         return {
             ...state,
-            sortBy: 'creationDate',
-            sortDirection: 'desc',
+            sortBy: 'createdDate',
+            sortDirection: 'asc',
             filterTerm: '',
             filterError: '',
+        };
+    case TODO_ACTIONS.BUMP_VERSION:
+        return {
+            ...state,
+            dataVersion: state.dataVersion + 1,
         };
 
     default:

@@ -59,17 +59,18 @@ export function AuthProvider({ children }) {
       if (!res.ok) throw new Error('Logout failed');
 
       return { success: true };
-    } catch (err) {
-      return { success: false, message: err.message };
+    } catch (error) {
+      return { success: false,
+               error: error.message };
     }
   };
 
  const value = {
-  email,           // Current user's email
-  token,           // CSRF token for API requests
-  isAuthenticated: !!token,  // Computed boolean for auth status
-  login,           // Function to authenticate user
-  logout,          // Function to clear authentication
+  email,           
+  token,          
+  isAuthenticated: !!token,  
+  login,          
+  logout,         
 };
 
   return (

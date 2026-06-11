@@ -4,7 +4,6 @@ import { useAuth } from "../contexts/AuthContext.jsx";
 function Navigation() {
   const { isAuthenticated } = useAuth();
 
-  // Style function for NavLink
   const navLinkStyle = ({ isActive }) => ({
     fontWeight: isActive ? "bold" : "normal",
     textDecoration: isActive ? "underline" : "none",
@@ -20,14 +19,12 @@ function Navigation() {
           padding: 0,
         }}
       >
-        {/* Always visible */}
         <li>
           <NavLink to="/about" style={navLinkStyle}>
             About
           </NavLink>
         </li>
 
-        {/* Authenticated users */}
         {isAuthenticated && (
           <>
             <li>
@@ -43,7 +40,6 @@ function Navigation() {
           </>
         )}
 
-        {/* Unauthenticated users */}
         {!isAuthenticated && (
           <li>
             <NavLink to="/login" style={navLinkStyle}>
