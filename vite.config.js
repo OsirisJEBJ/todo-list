@@ -8,6 +8,7 @@ export default ({ mode }) => {
   return defineConfig({
     plugins: [react()],
     server: {
+      historyApiFallback: true,
       port: 3001,
       proxy: {
         '/api': {
