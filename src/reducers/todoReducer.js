@@ -30,7 +30,7 @@ export const initialTodoState = {
   error: '',
   filterError: '',
   isTodoListLoading: true,
-  sortBy: 'createdDate',
+  sortBy: 'createdAt',
   sortDirection: 'asc',
   filterTerm: '',
   dataVersion: 0,
@@ -168,7 +168,7 @@ export function todoReducer(state, action) {
     case TODO_ACTIONS.RESET_FILTERS:
         return {
             ...state,
-            sortBy: 'createdDate',
+            sortBy: 'createdAt',
             sortDirection: 'asc',
             filterTerm: '',
             filterError: '',
