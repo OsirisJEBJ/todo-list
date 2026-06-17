@@ -22,6 +22,7 @@ FEATURES
 -Loading states and visual feedback
 -Responsive UI built with CSS Modules
 -Custom hooks (e.g., useEditableTitle)
+-Todo deletion (handled through completion state instead of physical removal)
 
 
 TECHNOLOGIES USED
@@ -40,17 +41,17 @@ SCREENSHOTS
 
 MOBILE
 ![Login](./src/assets/evidence-images/mobileLogin.png)
-![Todo List](./src/assets/evidence-images/mobileTodoList.png)
-![Edit Todo List](./src/assets/evidence-images/mobileEditTodo.png)
-![About Page](./src/assets/evidence-images/mobileAboutPage.png)
-![Profile Page](./src/assets/evidence-images/mobileProfilePage.png)
+![TodoList](./src/assets/evidence-images/mobileTodoList.png)
+![EditTodoList](./src/assets/evidence-images/mobileEditTodo.png)
+![AboutPage](./src/assets/evidence-images/mobileAboutPage.png)
+![ProfilePage](./src/assets/evidence-images/mobileProfilePage.png)
 
 DESKTOP
 ![Login](./src/assets/evidence-images/desktopLogin.png)
-![Todo List](./src/assets/evidence-images/desktopTodoList.png)
-![Edit Todo List](./src/assets/evidence-images/desktopEditTodos.png)
-![About Page](./src/assets/evidence-images/desktopAboutPage.png)
-![Profile Page](./src/assets/evidence-images/desktopProfilePage.png)
+![TodoList](./src/assets/evidence-images/desktopTodoList.png)
+![EditTodoList](./src/assets/evidence-images/desktopEditTodos.png)
+![AboutPage](./src/assets/evidence-images/desktopAboutPage.png)
+![ProfilePage](./src/assets/evidence-images/desktopProfilePage.png)
 
 
 GETTING STARTED 
