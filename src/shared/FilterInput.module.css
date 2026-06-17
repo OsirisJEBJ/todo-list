@@ -1,0 +1,44 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 14px;
+  color: #111;
+  opacity: 0.8;
+}
+
+.input {
+  width: 95%;
+  padding: 12px;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(4px);
+  font-size: 16px;
+  color: #111;
+  transition: 0.2s ease;
+}
+
+.input::placeholder {
+  color: rgba(0,0,0,0.4);
+}
+
+.input:focus {
+  border-color: #111;
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.1);
+  outline: none;
+}
+
+@media (max-width: 480px) {
+  .input {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .label {
+    font-size: 13px;
+  }
+}

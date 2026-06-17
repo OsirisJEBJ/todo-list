@@ -1,0 +1,54 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.label {
+  font-size: 14px;
+  color: #111;
+  opacity: 0.8;
+  white-space: nowrap;
+}
+
+.select {
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: #111;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  opacity: 0.85;
+}
+
+.select:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.55);
+  transform:  scale(1.03);
+}
+
+@media (max-width: 480px) {
+  .group {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .select {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .label {
+    font-size: 13px;
+  }
+}

@@ -1,48 +1,43 @@
-import TodoList from './features/TodoList/TodoList';
-import TodoForm from './features/TodoForm';
-import './App.css';
-import { useState } from 'react';
-
+import Header from './shared/Header';
+import TodosPage from './pages/TodosPage';
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import LoginPage from './pages/LoginPage';
+import ProfilePage from './pages/ProfilePage';
+import NotFoundPage from './pages/NotFoundPage';
+import RequireAuth from './components/RequireAuth';
+import {Routes, Route} from 'react-router';
 function App() {
-  const [todoList, setTodoList] = useState([]);
 
-function addTodo(todoTitle) {
-  const newTodo = {
-    id: Date.now(),
-    title: todoTitle,
-    isCompleted: false
-  };
-  setTodoList(previous => [newTodo, ...previous]);
+  return (
+    <>
+      <Header />
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/about' element={<AboutPage />} />
+        <Route path='/login' element={<LoginPage />} />
+        <Route
+          path='/todos'
+          element={
+          <RequireAuth>
+            <TodosPage />
+          </RequireAuth>
+          }
+        />
+        <Route
+          path='/profile'
+          element={
+          <RequireAuth>
+            <ProfilePage />
+          </RequireAuth>
+          }
+        />
+        <Route path='*' element={<NotFoundPage />} />
+
+      </Routes>  
+    </>
+  );
 }
 
-function completeTodo(id) {
-  setTodoList(previous => previous.map(todo => {
-    if (todo.id === id) {
-      return { ...todo, isCompleted: true };
-    }
-    return todo;
-  }));
-}
+export default App;
 
-function updateTodo(editTodo){
-  setTodoList(previous => previous.map(todo => {
-    if (todo.id === editTodo.id) {
-      return { ...todo, title: editTodo.title };
-    }
-    return todo;
-  }));
-
-}
-
-
-return(
-<div>
-   <h1>Todo List</h1>
-   <TodoForm onAddTodo={addTodo}/>
-    <TodoList onCompleteTodo={completeTodo} onUpdateTodo={updateTodo} todoList={todoList} />
-    
-</div>
-)
-}
-
-export default App

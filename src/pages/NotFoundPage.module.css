@@ -1,0 +1,51 @@
+.container {
+  max-width: 700px;
+  margin: 80px auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(8px);
+  border-radius: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  transition: 0.25s ease;
+  text-align: center;
+}
+
+.container:hover {
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(1.01);
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #111;
+}
+
+.text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #222;
+  opacity: 0.9;
+  margin-bottom: 1.4rem;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+.list li {
+  margin: 0.5rem 0;
+}
+
+.link {
+  color: #111;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+
+.link:hover {
+  opacity: 0.7;
+}

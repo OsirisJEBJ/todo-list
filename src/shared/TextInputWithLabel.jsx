@@ -1,22 +1,24 @@
+import styles from "./TextInputWithLabel.module.css";
 function TextInputWithLabel({
     elementId,
     labelText,
-    ref,
+    inputRef,
     onChange,
     value
 
 }) {
     return (
-        <>
-            <label htmlFor={elementId}>{labelText}</label>        
+        <div className={styles.container}>
+            <label htmlFor={elementId} className={styles.label}>{labelText}</label>        
             <input
               id={elementId}
               type="text" 
-              ref={ref}
+              ref={inputRef}
               onChange={onChange}
               value={value}
+              className={styles.input}
             />
-        </>
+        </div>
     );
 }
 
