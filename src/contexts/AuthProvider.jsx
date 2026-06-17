@@ -47,7 +47,7 @@ export function AuthProvider({ children }) {
     }
 
     try {
-      const res = await fetch('/user/logoff', {
+      const res = await fetch('/api/user/logoff', {
         method: 'POST',
         headers: { 'X-CSRF-TOKEN': token },
         credentials: 'include'
