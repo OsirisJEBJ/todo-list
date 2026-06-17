@@ -50,7 +50,7 @@ function ProfilePage() {
 
         setTodoStats({ total, completed, active, percentage });
 
-      } catch (err) {
+      } catch {
         setError(`Error loading statistics at the moment.`);
       } finally {
         setLoading(false);
