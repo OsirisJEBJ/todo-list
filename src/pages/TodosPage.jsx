@@ -166,7 +166,6 @@ async function completeTodo(id) {
       body: JSON.stringify({
         title: originalTodo.title,
         isCompleted: true,
-        createdAt: originalTodo.createdAt
       })
     });
 
@@ -211,7 +210,6 @@ async function updateTodo(editTodo) {
       body: JSON.stringify({
         title: editTodo.title,
         isCompleted: originalTodo.isCompleted,
-        createdAt: originalTodo.createdAt
 
       })
     });
