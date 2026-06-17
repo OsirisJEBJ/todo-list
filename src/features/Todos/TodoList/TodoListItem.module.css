@@ -1,0 +1,132 @@
+.item {
+  list-style: none;
+  padding: 14px 18px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  transition: 0.25s ease;
+}
+
+.item:hover {
+  cursor:pointer;
+  background: rgba(255, 255, 255, 0.6);
+  transform:  scale(1.02);
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.title {
+  font-size: 16px;
+  color: #111;
+  cursor: text;
+  transition: 0.2s ease;
+}
+
+.completed {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.button {
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  opacity: 0.85;
+}
+
+.button:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.55);
+  transform:  scale(1.03);
+}
+
+.button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.editContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.buttonCancel {
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: rgba(255, 0, 0, 0.25);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 0, 0, 0.3);
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  opacity: 0.9;
+}
+
+.buttonCancel:hover {
+  background: rgba(255, 0, 0, 0.45);
+  transform:  scale(1.03);
+}
+
+.buttonUpdate {
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: rgba(0, 128, 0, 0.25);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(0, 128, 0, 0.3);
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  opacity: 0.9;
+}
+
+.buttonUpdate:hover {
+  background: rgba(0, 128, 0, 0.45);
+  transform: scale(1.03);
+}
+
+
+@media (max-width: 480px) {
+  .item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .buttons {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .title {
+    font-size: 14px;
+  }
+}

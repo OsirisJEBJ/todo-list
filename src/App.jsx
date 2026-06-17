@@ -13,23 +13,23 @@ function App() {
     <>
       <Header />
       <Routes>
-                <Route path='/' element={<HomePage />} />
+        <Route path='/' element={<HomePage />} />
         <Route path='/about' element={<AboutPage />} />
         <Route path='/login' element={<LoginPage />} />
         <Route
           path='/todos'
           element={
-            <RequireAuth>
-              <TodosPage />
-            </RequireAuth>
+          <RequireAuth>
+            <TodosPage />
+          </RequireAuth>
           }
         />
         <Route
           path='/profile'
           element={
-            <RequireAuth>
-              <ProfilePage />
-            </RequireAuth>
+          <RequireAuth>
+            <ProfilePage />
+          </RequireAuth>
           }
         />
         <Route path='*' element={<NotFoundPage />} />

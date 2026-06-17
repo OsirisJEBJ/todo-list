@@ -1,3 +1,4 @@
+import styles from "./StatusFilter.module.css"
 import { useSearchParams } from 'react-router';
 
 function StatusFilter() {
@@ -14,17 +15,20 @@ function StatusFilter() {
   };
 
   return (
-    <div>
-      <label htmlFor='statusFilter'>Show:</label>
+    <div className={styles.container}>
+      <div className={styles.group}>
+      <label htmlFor='statusFilter' className={styles.label}>Show:</label>
       <select
         id='statusFilter'
         value={currentStatus}
         onChange={(e) => handleStatusChange(e.target.value)}
+        className={styles.select}
       >
         <option value='all'>All Todos</option>
         <option value='active'>Active Todos</option>
         <option value='completed'>Completed Todos</option>
       </select>
+    </div>
     </div>
   );
 }

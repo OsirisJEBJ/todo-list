@@ -1,13 +1,16 @@
+import styles from "./Header.module.css";
 import { useAuth } from "../contexts/AuthContext";
 import Logoff  from "../features/Logoff";
 import Navigation from "./Navigation";
 function Header(){
     const {isAuthenticated} = useAuth();
     return (
-        <header className="header">
-            <h1>Todo List</h1>
+        <header className={styles.header}>
+            <h1 className={styles.title}>Todo List</h1>
+        <div className={styles.right}>
             <Navigation />
             {isAuthenticated && <Logoff />}
+        </div>
         </header>
     );
 }

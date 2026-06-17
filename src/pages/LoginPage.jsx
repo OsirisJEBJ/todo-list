@@ -1,3 +1,5 @@
+import { sanitizeInput } from '../utils/sanitize.js';
+import styles from './LoginPage.module.css';
 import { useState, useEffect } from 'react';
 import {useNavigate, useLocation} from 'react-router';
 import { useAuth } from '../contexts/AuthContext.jsx';
@@ -23,11 +25,12 @@ function LoginPage() {
     event.preventDefault();
     setIsLoggingOn(true);
     setAuthError('');
-
-    const result = await login(email, password);
+    const cleanEmail = sanitizeInput(email);
+    const cleanPassword = sanitizeInput(password);
+    const result = await login(cleanEmail, cleanPassword);
 
     if (!result.success) {
-      setAuthError(result.error || 'Login failed');
+      setAuthError('Login failed, invalid email or password.');
     }
 
     setIsLoggingOn(false);
@@ -35,31 +38,38 @@ function LoginPage() {
 
 
   return (
-    <form onSubmit={handleSubmit}>
+  <div className={styles.container}>
+    <h1 className={styles.title}>Log In</h1>
+    <form 
+    onSubmit={handleSubmit}
+    className={styles.form}> 
       {authError && <p>{authError}</p>}
 
-      <label htmlFor='email'>Email:</label>
+      <label htmlFor='email' className={styles.label}>Email:</label>
         <input 
           type="email" 
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => setEmail(sanitizeInput(e.target.value))}
           autoComplete='username'
           required
+          className={styles.input}
         />
 
-      <label htmlFor='password'>Password:</label>
+      <label htmlFor='password' className={styles.label}>Password:</label>
         <input 
           type="password" 
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => setPassword(sanitizeInput(e.target.value))}
           autoComplete='current-password'
           required
+          className={styles.input}
         />
 
-      <button type="submit" disabled={isLoggingOn}>
-        {isLoggingOn ? "Logging in..." : "Log On"}
+      <button type="submit" disabled={isLoggingOn} className={styles.button}>
+        {isLoggingOn ?  <div className={styles.spinner}></div> : "Log On"}
       </button>
     </form>
+    </div>
   );
 }
 

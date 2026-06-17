@@ -1,3 +1,4 @@
+import styles from "./TodosPage.module.css";
 import { useSearchParams } from 'react-router';
 import { useReducer, useEffect, useCallback } from 'react';
 import { useAuth } from '../contexts/AuthContext.jsx';
@@ -237,16 +238,16 @@ async function updateTodo(editTodo) {
 
 
 return(
-<div>
+<div className={styles.wrapper}>
 
     {error && (
-  <div>
+  <div className={styles.errorBox}>
     <p>{error}</p>
     <button onClick={() => dispatch({type: TODO_ACTIONS.CLEAR_ERROR})}>Clear Error</button>
   </div>
 )}
     {filterError && (
-  <div>
+  <div className={styles.errorBox}>
     <p>{filterError}</p>
     <button onClick={() => dispatch({type: TODO_ACTIONS.CLEAR_FILTER_ERROR})}>Clear Filter Error</button>
     <button
@@ -260,7 +261,7 @@ return(
 )}
 
 
-{isTodoListLoading && <p>Loading todos...</p>}
+{isTodoListLoading && <div className={styles.spinner}></div>}
     <SortBy
   sortBy={sortBy}
   sortDirection={sortDirection}

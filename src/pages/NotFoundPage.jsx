@@ -1,16 +1,17 @@
+import styles from "./NotFoundPage.module.css";
 import { Link } from "react-router";
 
 function NotFoundPage() {
   return (
-    <div style={{ padding: "1rem", maxWidth: "700px" }}>
-      <h1>404 – Page Not Found</h1>
+    <div className={styles.container}>
+      <h1 className={styles.title}>404 – Page Not Found</h1>
 
-      <p>
+      <p className={styles.text}>
         The page you’re looking for doesn’t exist or may have been moved.
         You can use the links below to get back to the main parts of the app.
       </p>
 
-      <ul>
+      <ul className={styles.list}>
         <li>
           <Link to="/login">Go to Login</Link>
         </li>

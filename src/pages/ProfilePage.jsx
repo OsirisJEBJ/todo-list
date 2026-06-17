@@ -1,3 +1,5 @@
+import { sanitizeInput } from "../utils/sanitize.js";
+import styles from "./ProfilePage.module.css";
 import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext.jsx";
 
@@ -49,7 +51,7 @@ function ProfilePage() {
         setTodoStats({ total, completed, active, percentage });
 
       } catch (err) {
-        setError(`Error loading statistics: ${err.message}`);
+        setError(`Error loading statistics at the moment.`);
       } finally {
         setLoading(false);
       }
@@ -59,36 +61,41 @@ function ProfilePage() {
   }, [token]);
 
   if (loading) {
-    return <p>Loading profile...</p>;
+    return(
+    <div className={styles.spinnerContainer}>
+    <p>Loading profile...</p>
+    <div className={styles.spinner}></div>
+    </div>
+    );
   }
 
   if (error) {
-    return <p>{error}</p>;
+    return <p className={styles.error}>{sanitizeInput(error)}</p>;
   }
 
   return (
-    <div style={{ padding: "1rem", maxWidth: "700px" }}>
-      <h1>Your Profile</h1>
+    <div className={styles.container}>
+      <h1 className={styles.title}>Your Profile</h1>
 
-      <p>
+      <p className={styles.text}>
         This page gives a quick overview of your task activity. As part of this guided
         project, building this section has helped me understand how to work with data,
         fetch information from an API, and display useful statistics in a clear way.
       </p>
 
-      <section>
-        <h2>Task Summary</h2>
-        <ul>
-          <li><strong>Total tasks:</strong> {stats.total}</li>
+      <section className={styles.section}>
+        <h2 className={styles.sectionTitle}>Task Summary</h2>
+        <ul className={styles.list}>
+          <li><strong>Total tasks:</strong>{sanitizeInput(stats.total.toString())}</li>
           <li><strong>Completed:</strong> {stats.completed}</li>
           <li><strong>Active:</strong> {stats.active}</li>
           <li><strong>Completion rate:</strong> {stats.percentage}%</li>
         </ul>
       </section>
 
-      <section>
-        <h2>What This Page Represents</h2>
-        <p>
+      <section className={styles.section}>
+        <h2 className={styles.sectionTitle}>What This Page Represents</h2>
+        <p  className={styles.text}>
           Creating this profile page has been a good way to practice working with API
           data and organizing information in a simple, readable format. It’s another
           step in understanding how different parts of a React application connect and

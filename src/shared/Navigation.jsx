@@ -1,26 +1,19 @@
+import styles from "./Navigation.module.css"
 import { NavLink } from "react-router";
 import { useAuth } from "../contexts/AuthContext.jsx";
 
 function Navigation() {
   const { isAuthenticated } = useAuth();
 
-  const navLinkStyle = ({ isActive }) => ({
-    fontWeight: isActive ? "bold" : "normal",
-    textDecoration: isActive ? "underline" : "none",
-  });
+ 
 
   return (
-    <nav>
-      <ul
-        style={{
-          listStyle: "none",
-          display: "flex",
-          gap: "1rem",
-          padding: 0,
-        }}
-      >
+    <nav className={styles.nav}>
+      <ul className={styles.list}>
         <li>
-          <NavLink to="/about" style={navLinkStyle}>
+          <NavLink to="/about" className={({isActive})=>
+          isActive ? styles.active : styles.link
+        }>
             About
           </NavLink>
         </li>
@@ -28,12 +21,16 @@ function Navigation() {
         {isAuthenticated && (
           <>
             <li>
-              <NavLink to="/todos" style={navLinkStyle}>
+              <NavLink to="/todos" className={({ isActive }) =>
+                  isActive ? styles.active : styles.link
+                }>
                 Todos
               </NavLink>
             </li>
             <li>
-              <NavLink to="/profile" style={navLinkStyle}>
+              <NavLink to="/profile" className={({ isActive }) =>
+                  isActive ? styles.active : styles.link
+                }>
                 Profile
               </NavLink>
             </li>
@@ -42,7 +39,9 @@ function Navigation() {
 
         {!isAuthenticated && (
           <li>
-            <NavLink to="/login" style={navLinkStyle}>
+            <NavLink to="/login" className={({ isActive }) =>
+                  isActive ? styles.active : styles.link
+                }>
               Login
             </NavLink>
           </li>
