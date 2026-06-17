@@ -6,7 +6,9 @@ This project helped me understand from scratch how all the pieces of a real-worl
 
 
 LIVE DEMO 
+
 todo-list-six-eta-41.vercel.app
+
 
 FEATURES
 
@@ -40,19 +42,13 @@ TECHNOLOGIES USED
 
 SCREENSHOTS
 
-MOBILE
-![Login](./src/assets/evidence-images/mobileLogin.png)
-![TodoList](./src/assets/evidence-images/mobileTodoList.png)
-![EditTodoList](./src/assets/evidence-images/mobileEditTodo.png)
-![AboutPage](./src/assets/evidence-images/mobileAboutPage.png)
-![ProfilePage](./src/assets/evidence-images/mobileProfilePage.png)
-
-DESKTOP
-![Login](./src/assets/evidence-images/desktopLogin.png)
-![TodoList](./src/assets/evidence-images/desktopTodoList.png)
-![EditTodoList](./src/assets/evidence-images/desktopEditTodos.png)
-![AboutPage](./src/assets/evidence-images/desktopAboutPage.png)
-![ProfilePage](./src/assets/evidence-images/desktopProfilePage.png)
+| Mobile | Desktop |
+|--------|----------|
+| <img src="./src/assets/evidence-images/mobileLogin.png" width="200" /> | <img src="./src/assets/evidence-images/desktopLogin.png" width="300" /> |
+| <img src="./src/assets/evidence-images/mobileTodoList.png" width="200" /> | <img src="./src/assets/evidence-images/desktopTodoList.png" width="300" /> |
+| <img src="./src/assets/evidence-images/mobileEditTodo.png" width="200" /> | <img src="./src/assets/evidence-images/desktopEditTodos.png" width="300" /> |
+| <img src="./src/assets/evidence-images/mobileAboutPage.png" width="200" /> | <img src="./src/assets/evidence-images/desktopAboutPage.png" width="300" /> |
+| <img src="./src/assets/evidence-images/mobileProfilePage.png" width="200" /> | <img src="./src/assets/evidence-images/desktopProfilePage.png" width="300" /> |
 
 
 GETTING STARTED 
